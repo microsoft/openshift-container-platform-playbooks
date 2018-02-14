@@ -1,0 +1,13 @@
+---
+- hosts: masters
+  gather_facts: no
+  remote_user: "{{ lookup('env','SUDOUSER') }}"
+  become: yes
+  become_method: sudo
+  vars:
+    description: "Create initial OpenShift user"
+  tasks:
+  - name: create directory
+    file: path=/etc/origin/master state=directory
+  - name: add initial OpenShift user
+    shell: "htpasswd -cb /etc/origin/master/htpasswd {{ lookup('env','SUDOUSER') }} \"{{ lookup('env','PASSWORD') }}\""

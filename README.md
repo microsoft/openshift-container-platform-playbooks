@@ -1,3 +1,15 @@
+# OpenShift Container Platform Playbooks Used by Deployment templates
+
+## NOTE: Deployment Template: [aka.ms/OpenShift](http://aka.ms/OpenShift)
+
+The master branch will now contain the most current release of OpenShift Container Platform with experimental items.  This may cause instability but will include new things or try new things.
+
+We will now have branches for the stable releases:
+- Release-3.6
+- Release-3.7
+- etc.
+
+
 
 # Contributing
 

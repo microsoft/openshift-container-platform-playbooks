@@ -1,0 +1,11 @@
+---
+- hosts: master0
+  gather_facts: no
+  remote_user: "{{ lookup('env','SUDOUSER') }}"
+  become: yes
+  become_method: sudo
+  vars:
+    description: "Make user cluster admin"
+  tasks:
+  - name: make OpenShift user cluster admin
+    shell: "oadm policy add-cluster-role-to-user cluster-admin {{ lookup('env','SUDOUSER') }} --config=/etc/origin/master/admin.kubeconfig"
