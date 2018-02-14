@@ -1,4 +1,4 @@
---
+---
 - hosts: master0
   gather_facts: no
   remote_user: "{{ lookup('env','SUDOUSER') }}"
