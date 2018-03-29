@@ -8,12 +8,12 @@
     azure_conf: "{{ azure_conf_dir }}/azure.conf"
 
   tasks:
-  - name: make sure /etc/azure exists
+  - name: make sure {{ azure_conf_dir }} exists
     file:
       state: directory
       path: "{{ azure_conf_dir }}"
 
-  - name: populate /etc/azure/azure.conf
+  - name: populate {{ azure_conf }}
     copy:
       dest: "{{ azure_conf }}"
       content: |
