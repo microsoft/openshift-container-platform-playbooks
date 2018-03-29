@@ -1,0 +1,31 @@
+---
+- hosts: all
+  gather_facts: no
+  serial: 1
+  become: yes
+  vars:
+    azure_conf_dir: /etc/origin/cloudprovider
+    azure_conf: "{{ azure_conf_dir }}/azure.conf"
+
+  tasks:
+  - name: make sure {{ azure_conf_dir }} exists
+    file:
+      state: directory
+      path: "{{ azure_conf_dir }}"
+
+  - name: populate {{ azure_conf }}
+    copy:
+      dest: "{{ azure_conf }}"
+      content: |
+        {
+          "aadClientId": "{{ lookup('env','AADCLIENTID') }}",
+          "aadClientSecret": "{{ lookup('env','AADCLIENTSECRET') }}",
+          "aadTenantId": "{{ lookup('env','TENANTID') }}",
+          "subscriptionId": "{{ lookup('env','SUBSCRIPTIONID') }}",
+          "tenantId": "{{ lookup('env','TENANTID') }}",
+          "resourceGroup": "{{ lookup('env','RESOURCEGROUP') }}",
+          "location": "{{ lookup('env','LOCATION') }}",
+          "cloud": "{{ lookup('env','CLOUDNAME')}}"
+        }
+
+
