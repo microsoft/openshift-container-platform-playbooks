@@ -17,13 +17,15 @@
     copy:
       dest: "{{ azure_conf }}"
       content: |
-        [Global]
-        aadClientId = "{{ lookup('env','AADCLIENTID') }}"
-        aadClientSecret = "{{ lookup('env','AADCLIENTSECRET') }}"
-        aadTenantId = "{{ lookup('env','TENANTID') }}"
-        subscriptionId = "{{ lookup('env','SUBSCRIPTIONID') }}"
-        tenantId = "{{ lookup('env','TENANTID') }}"
-        resourceGroup = "{{ lookup('env','RESOURCEGROUP') }}"
-        location = "{{ lookup('env','LOCATION') }}"
-        cloud = "{{ lookup('env','CLOUDNAME')}}"
+        {
+          "aadClientId": "{{ lookup('env','AADCLIENTID') }}",
+          "aadClientSecret": "{{ lookup('env','AADCLIENTSECRET') }}",
+          "aadTenantId": "{{ lookup('env','TENANTID') }}",
+          "subscriptionId": "{{ lookup('env','SUBSCRIPTIONID') }}",
+          "tenantId": "{{ lookup('env','TENANTID') }}",
+          "resourceGroup": "{{ lookup('env','RESOURCEGROUP') }}",
+          "location": "{{ lookup('env','LOCATION') }}",
+          "cloud": "{{ lookup('env','CLOUDNAME')}}"
+        }
+
 
