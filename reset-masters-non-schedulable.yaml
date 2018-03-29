@@ -1,7 +1,3 @@
-###
-# Renamed to reset-masters-non-schedulable.yaml
-# Left with this existing name for backwards compatibility
-###
 - hosts: masters
   gather_facts: no
   become: yes
