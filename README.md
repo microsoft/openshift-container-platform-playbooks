@@ -7,6 +7,7 @@ The master branch will now contain the most current release of OpenShift Contain
 We will now have branches for the stable releases:
 - Release-3.6
 - Release-3.7
+- Release-3.9
 - etc.
 
 

@@ -5,6 +5,6 @@
   - lineinfile:
       dest: /etc/ansible/hosts
       insertafter: '[new_nodes]'
-      line: "$INFRA openshift_node_labels=\"{'type': 'infra', 'zone': 'default'}\" openshift_hostname=$INFRA"
+      line: "{{ lookup('env','INFRA') }} openshift_node_labels=\"{'type': 'infra', 'zone': 'default', 'region': 'infra'}\" openshift_hostname={{ lookup('env','INFRA') }}"
       regexp: '^$INFRA '
       state: present
