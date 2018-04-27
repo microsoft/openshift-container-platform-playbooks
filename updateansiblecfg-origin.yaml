@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  become: yes
+  gather_facts: no
+  tasks:
+  - lineinfile:
+      dest: /etc/ansible/ansible.cfg
+      regexp: '^library '
+      insertafter: '#library        = /usr/share/my_modules/'
+      line: 'library = /home/${SUDOUSER}/ansible/openshift-ansible/roles/lib_utils/library/'
