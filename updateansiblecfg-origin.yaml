@@ -7,4 +7,4 @@
       dest: /etc/ansible/ansible.cfg
       regexp: '^library '
       insertafter: '#library        = /usr/share/my_modules/'
-      line: 'library = /home/{{ lookup('env','SUDOUSER') }}/ansible/openshift-ansible/roles/lib_utils/library/'
+      line: 'library = /home/{{ lookup('env','SUDOUSER') }}/openshift-ansible/roles/lib_utils/library/'
