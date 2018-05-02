@@ -4,9 +4,12 @@
   vars:
     description: Ensure DNS hostname resolution works before continuing
   tasks:
-    - name: begin loop
-      shell: host {{ lookup('env','HOSTNAME') }}
-      register: result
-      until: result.rc == 0
-      retries: 200
-      delay: 10
+    - name: Wait for DNS hostname resolution
+      wait_for:
+        port: 22
+        host: '{{ item }}'
+        connect_timeout: 10
+        timeout: 2000
+        state: started
+      with_items: "{{ query('inventory_hostnames', 'all') }}"
+      connection: local
