@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: no
+  vars:
+    description: Ensure DNS hostname resolution works before continuing
+  tasks:
+    - name: begin loop
+      shell: ping -c 1 localhost
+      register: result
+      until: result.rc == 0
+      retries: 200
+      delay: 10
