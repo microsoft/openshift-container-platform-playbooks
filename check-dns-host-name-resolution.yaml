@@ -1,7 +1,6 @@
 ---
 - hosts: all
   gather_facts: no
-  connection: local
   vars:
     description: Ensure DNS hostname resolution works before continuing
   tasks:
