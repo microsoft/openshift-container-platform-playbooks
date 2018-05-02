@@ -1,11 +1,11 @@
 ---
-- hosts: all
+- hosts: localhost
   gather_facts: no
   vars:
     description: Ensure DNS hostname resolution works before continuing
   tasks:
     - name: begin loop
-      shell: ping -c 1 localhost
+      shell: host {{ lookup('env','HOSTNAME') }}
       register: result
       until: result.rc == 0
       retries: 200
