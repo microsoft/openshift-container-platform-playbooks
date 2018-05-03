@@ -1,10 +1,10 @@
 ---
-- hosts: localhost
+- hosts: all
   gather_facts: no
   vars:
     description: Ensure DNS hostname resolution works before continuing
   tasks:
-    - name: Wait for DNS hostname resolution - wil try for up to 33 minutes
+    - name: Wait for DNS hostname resolution - will try for up to 33 minutes
       wait_for:
         port: 22
         host: '{{ inventory_hostname }}'
