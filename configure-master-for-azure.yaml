@@ -17,12 +17,12 @@
       state: restarted
       name: atomic-openshift-master-api
 
-  post_tasks:
   - name: restart atomic-openshift-master-controllers
     systemd:
       state: restarted
       name: atomic-openshift-master-controllers
 
+  post_tasks:
   - name: insert the azure disk config into the master
     modify_yaml:
       dest: "{{ master_conf }}"
