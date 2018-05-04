@@ -17,6 +17,7 @@
       state: restarted
       name: atomic-openshift-master-api
 
+  post_tasks:
   - name: restart atomic-openshift-master-controllers
     systemd:
       state: restarted
