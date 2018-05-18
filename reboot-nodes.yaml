@@ -15,6 +15,6 @@
       port: 22
       host: "{{ ansible_ssh_host|default(inventory_hostname) }}"
       delay: 10
-      timeout: 180
+      timeout: 420
     connection: local
     become: false
