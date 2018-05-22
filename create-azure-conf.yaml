@@ -25,7 +25,9 @@
           "tenantId": "{{ lookup('env','TENANTID') }}",
           "resourceGroup": "{{ lookup('env','RESOURCEGROUP') }}",
           "location": "{{ lookup('env','LOCATION') }}",
-          "cloud": "{{ lookup('env','CLOUDNAME')}}"
+          "cloud": "{{ lookup('env','CLOUDNAME')}}",
+          "vnetName": "{{ lookup('env','VNETNAME')}}",
+          "securityGroupName": "{{ lookup('env','NODENSG')}}",
+          "primaryAvailabilitySetName": "{{ lookup('env','NODEAVAILIBILITYSET')}}"
         }
-
-
+        
