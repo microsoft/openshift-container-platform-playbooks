@@ -1,7 +1,7 @@
 - hosts: masters
   become: yes
-  vars:
-    admin_user: "{{ lookup('env','SUDOUSER') }}"
+  vars_files:
+  - vars.yaml
   tasks:
     - name: Configure master client for local API
       lineinfile:
@@ -31,8 +31,8 @@
 
 - hosts: nodes:!masters
   become: yes
-  vars:
-    master_lb_private_dns: "{{ lookup('env','PRIVATEDNS') }}"
+  vars_files:
+  - vars.yaml
   tasks:
     - name: Configure non-master node for API load balancer
       lineinfile:
@@ -50,13 +50,16 @@
 
 - hosts: localhost
   become: yes
-  vars:
-    master_lb_private_dns: "{{ lookup('env','PRIVATEDNS') }}"
+  vars_files:
+  - vars.yaml    
   tasks:
     - name: Configure local client for API load balancer
       lineinfile:
-        path: "~/.kube/config"
+        path: "{{ item }}"
         regexp: "    server: https://[^:]+:{{ hostvars[groups['masters'][0]]['openshift_master_api_port'] }}"
         line: "    server: https://{{ master_lb_private_dns }}:{{ hostvars[groups['masters'][0]]['openshift_master_api_port'] }}"
         state: present
         backup: yes
+      with_items:
+        - /root/.kube/config
+        - /home/{{ admin_user }}/.kube/config
