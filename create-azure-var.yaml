@@ -4,7 +4,7 @@
   become: yes
   vars:
     azure_conf_dir: /etc/origin/cloudprovider
-    azure_var: "{{ azure_conf_dir }}/azurevar.yml"
+    azure_var: "{{ azure_conf_dir }}/azurevars.yaml"
 
   tasks:
   - name: make sure {{ azure_conf_dir }} exists
@@ -18,7 +18,6 @@
       content: | 
 		  aadClientId: "{{ lookup('env','AADCLIENTID') }}"
 		  aadClientSecret: "{{ lookup('env','AADCLIENTSECRET') }}"
-		  aadTenantId: "{{ lookup('env','TENANTID') }}"
 		  subscriptionId: "{{ lookup('env','SUBSCRIPTIONID') }}"
 		  tenantId: "{{ lookup('env','TENANTID') }}"
 
