@@ -1,0 +1,24 @@
+---
+- hosts: all
+  gather_facts: no
+  become: yes
+  vars:
+    azure_conf_dir: /etc/origin/cloudprovider
+    azure_var: "{{ azure_conf_dir }}/azurevar.yml"
+
+  tasks:
+  - name: make sure {{ azure_conf_dir }} exists
+    file:
+      state: directory
+      path: "{{ azure_conf_dir }}"
+
+  - name: populate {{ azure_var }}
+    copy:
+      dest: "{{ azure_var }}"
+      content: | 
+		  aadClientId: "{{ lookup('env','AADCLIENTID') }}"
+		  aadClientSecret: "{{ lookup('env','AADCLIENTSECRET') }}"
+		  aadTenantId: "{{ lookup('env','TENANTID') }}"
+		  subscriptionId: "{{ lookup('env','SUBSCRIPTIONID') }}"
+		  tenantId: "{{ lookup('env','TENANTID') }}"
+
