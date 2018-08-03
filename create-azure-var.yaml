@@ -16,8 +16,8 @@
     copy:
       dest: "{{ azure_var }}"
       content: | 
-		  aadClientId: "{{ lookup('env','AADCLIENTID') }}"
-		  aadClientSecret: "{{ lookup('env','AADCLIENTSECRET') }}"
-		  subscriptionId: "{{ lookup('env','SUBSCRIPTIONID') }}"
-		  tenantId: "{{ lookup('env','TENANTID') }}"
+        aadClientId: "{{ lookup('env','AADCLIENTID') }}"
+        aadClientSecret: "{{ lookup('env','AADCLIENTSECRET') }}"
+        subscriptionId: "{{ lookup('env','SUBSCRIPTIONID') }}"
+        tenantId: "{{ lookup('env','TENANTID') }}"
 
