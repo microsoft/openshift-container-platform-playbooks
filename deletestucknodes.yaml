@@ -9,4 +9,4 @@
     description: "Reset Masters to non-schedulable"
   tasks:
   - name: set masters as unschedulable
-    command: oadm manage-node {{inventory_hostname}} --schedulable=false
+    command: oc adm manage-node {{inventory_hostname}} --schedulable=false
