@@ -7,7 +7,7 @@
       lineinfile:
         path: "{{ item }}"
         regexp: "    server: https://.+"
-        line: "    server: https://{{ ansible_hostname }}.domain"
+        line: "    server: https://{{ ansible_hostname }}.{{ domain }}"
         state: present
         backup: yes
       with_items:
@@ -19,7 +19,7 @@
       lineinfile:
         path: /etc/origin/node/node.kubeconfig
         regexp: "    server: https://[^:]+:{{ openshift_master_api_port }}"
-        line: "    server: https://{{ ansible_hostname }}.domain:{{ openshift_master_api_port }}"
+        line: "    server: https://{{ ansible_hostname }}.{{ domain }}:{{ openshift_master_api_port }}"
         state: present
         backup: yes
       notify: Restart atomic-openshift-node
