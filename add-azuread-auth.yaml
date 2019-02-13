@@ -1,0 +1,21 @@
+#!/usr/bin/ansible-playbook
+- hosts: masters
+  serial: 1
+  gather_facts: no
+  become: yes
+  handlers:
+  - name: restart atomic-openshift-master-api
+    command: /usr/local/bin/master-restart api
+ 
+  - name: restart atomic-openshift-master-controllers
+    command: /usr/local/bin/master-restart controllers
+ 
+  tasks:
+  - name: insert AAD info into master-config.yaml
+    blockinfile:
+      path: /etc/origin/master/master-config.yaml
+      insertafter: '  identityProviders:'
+      block: "{{ lookup('file', '/home/{{ lookup('env','SUDOUSER') }}/openshift-container-platform-playbooks/aad.yaml') }}"
+    notify:
+    - restart atomic-openshift-master-api
+    - restart atomic-openshift-master-controllers
