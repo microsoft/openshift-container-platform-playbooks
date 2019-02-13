@@ -15,7 +15,7 @@
     blockinfile:
       path: /etc/origin/master/master-config.yaml
       insertafter: '  identityProviders:'
-      block: "{{ lookup('file', '/home/{{ lookup('env','SUDOUSER') }}/openshift-container-platform-playbooks/aad.yaml') }}"
+      block: "{{ lookup('file', '/home/{{ admin_user }}/openshift-container-platform-playbooks/aad.yaml') }}"
     notify:
     - restart atomic-openshift-master-api
     - restart atomic-openshift-master-controllers
