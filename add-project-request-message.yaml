@@ -1,0 +1,21 @@
+#!/usr/bin/ansible-playbook
+- hosts: masters
+  serial: 1
+  gather_facts: no
+  become: yes
+  handlers:
+  - name: restart atomic-openshift-master-api
+    command: /usr/local/bin/master-restart api
+ 
+  - name: restart atomic-openshift-master-controllers
+    command: /usr/local/bin/master-restart controllers
+ 
+  tasks:
+  - name: insert Project Request Message info into master-config.yaml
+    blockinfile:
+      path: /etc/origin/master/master-config.yaml
+      insertafter: 'projectConfig:'
+      block: "{{ lookup('file', '/home/{{ admin_user }}/openshift-container-platform-playbooks/projectreqmsg.yaml') }}"
+    notify:
+    - restart atomic-openshift-master-api
+    - restart atomic-openshift-master-controllers
