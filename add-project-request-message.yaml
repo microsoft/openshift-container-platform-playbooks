@@ -12,10 +12,10 @@
  
   tasks:
   - name: insert Project Request Message info into master-config.yaml
-    blockinfile:
+    replace:
       path: /etc/origin/master/master-config.yaml
-      insertafter: 'projectConfig:'
-      block: "{{ lookup('file', '/home/{{ admin_user }}/openshift-container-platform-playbooks/projectreqmsg.yaml') }}"
+      regexp: 'projectRequestMessage: '''
+      replace: "{{ lookup('file', '/home/{{ admin_user }}/openshift-container-platform-playbooks/projectreqmsg.yaml') }}"
     notify:
     - restart atomic-openshift-master-api
     - restart atomic-openshift-master-controllers
